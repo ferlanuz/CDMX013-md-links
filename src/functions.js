@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const axios = require('axios');
+const http = require('http');
 
 
 
@@ -30,6 +31,7 @@ const getExtName = (file) => path.extname(file);
 // VALIDATE LINKS
 const validateLinks = (href) => axios.get(href);
 
+
 module.exports = {
     absolutePath,
     isRelative,
@@ -38,5 +40,7 @@ module.exports = {
     readFile,
     getExtName,
     validateLinks
+    // requireRequest
+       
 };
 

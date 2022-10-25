@@ -1,13 +1,13 @@
 const functions = require('./functions.js');
-// const axios = require('axios');
 
-const mdLinks = (filePath, opt) => {
+const mdLinks = (filePath, opt) => new Promise((resolve) => { 
     // VERIFY THE GIVEN PATH
     const isAbsolutePath = functions.absolutePath(filePath)
     ? filePath
     : functions.isRelative(filePath);
 
     let allFiles = [];
+    // READ THE FOLDERS
     if(functions.isFolder(isAbsolutePath)){
         allFiles = [...allFiles,...functions.readFolders(isAbsolutePath)];
     }else{
@@ -20,7 +20,9 @@ const mdLinks = (filePath, opt) => {
          return file;
         }
     })
+
     const arrayLinks = [];
+
      mdFiles.forEach((file) => {
         // READ FILES
         const filteredFiles = functions.readFile(file);
@@ -28,19 +30,42 @@ const mdLinks = (filePath, opt) => {
         const filterMethod = /\[(.+)\]\((https?:\/\/.+)\)/gi;
         const resultLinks = [...filteredFiles.matchAll(filterMethod)];
         if(resultLinks !== null || resultLinks !== 0){
-            console.log(resultLinks)
+            resultLinks.forEach(url => {
+                arrayLinks.push({
+                    href: url[2],
+                    text: url[1].slice(0, 50),
+                    file
+                })
+            }) 
         }
 
     })
-
-    
-    return mdFiles;
-   
+    // VALIDATE LINKS
+    if(opt.validate == true){
+        let arrPromises = [];
+        arrayLinks.forEach((link) => {
+            let linksValidated = functions.validateLinks(link.href)
+            .then((result) => {
+                // console.log(result);
+                return {
+                    href: link.href,
+                    text: link.text,
+                    file: link.file,
+                    status: result.status,
+                    message: result.statusText
+                }
+            })
+            .catch((err) => err.message);
+            arrPromises.push(linksValidated);
+        })
+        return Promise.all(arrPromises)
+        .then((result) => resolve(result));
+       
+    }else{
+        return resolve (arrayLinks);
     }
+    });
     
-    
-
-
 
 
 module.exports = {
