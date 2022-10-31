@@ -10,6 +10,18 @@ api.mdLinks(route,
     validate: optValidate, 
     stats: optStats
  })
-    .then(console.log);
-
-// console.log('hello world');
+    .then((result, optValidate, optStats) => {
+        //
+        if (optValidate && optStats) {
+            console.log(result)
+        }
+            if(optStats){
+           
+            }
+            if(optValidate){
+                console.log(result)
+            }else{
+                console.log(result)
+            }
+    });
+/*    */

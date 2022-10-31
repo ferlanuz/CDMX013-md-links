@@ -61,9 +61,19 @@ const mdLinks = (filePath, opt) => new Promise((resolve) => {
         return Promise.all(arrPromises)
         .then((result) => resolve(result));
        
+    }
+    if(opt.stats == true){
+         console.log(`Total: ${arrayLinks.length}
+Unique: `) 
+    }
+    if(opt.validate == true && opt.stats == true){
+
+
     }else{
         return resolve (arrayLinks);
     }
+
+
     });
     
 

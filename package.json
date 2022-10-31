@@ -6,6 +6,9 @@
   },
   "description": "## Índice",
   "main": "index.js",
+  "bin": {
+    "md-links": "cli.js"
+  },
   "directories": {
     "test": "test"
   },
@@ -23,9 +26,6 @@
   ],
   "author": "fer <ferlaranuz@gmail.com>",
   "license": "MIT",
-  "bin": {
-    "md-links": "/c/Users/Fer/Documents/laboratoria/CDMX013-md-links/cli.js"
-  },
   "bugs": {
     "url": "https://github.com/ferlanuz/CDMX013-md-links/issues"
   },
