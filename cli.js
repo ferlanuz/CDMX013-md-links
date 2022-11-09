@@ -12,11 +12,9 @@ api.mdLinks(route,
  })
     .then((result, optValidate, optStats) => {
         //
-        if (optValidate && optStats) {
-            console.log(result)
-        }
+      
             if(optStats){
-           
+           console.log(result)
             }
             if(optValidate){
                 console.log(result)

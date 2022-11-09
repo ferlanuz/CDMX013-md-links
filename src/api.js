@@ -2,8 +2,8 @@ const functions = require('./functions.js');
 
 const mdLinks = (filePath, opt) => new Promise((resolve) => { 
     // VERIFY THE GIVEN PATH
-    const isAbsolutePath = functions.absolutePath(filePath)
-    ? filePath
+    const isAbsolutePath = functions.absolutePath(filePath) 
+    ? filePath 
     : functions.isRelative(filePath);
 
     let allFiles = [];
@@ -20,7 +20,7 @@ const mdLinks = (filePath, opt) => new Promise((resolve) => {
          return file;
         }
     })
-
+    //ARRAY OF LINKS
     const arrayLinks = [];
 
      mdFiles.forEach((file) => {
@@ -40,6 +40,7 @@ const mdLinks = (filePath, opt) => new Promise((resolve) => {
         }
 
     })
+
     // VALIDATE LINKS
     if(opt.validate == true){
         let arrPromises = [];
@@ -62,21 +63,22 @@ const mdLinks = (filePath, opt) => new Promise((resolve) => {
         .then((result) => resolve(result));
        
     }
+    //REMOVE DUPLICATES
+    const unique = [];
+    arrayLinks.forEach((link) => {
+        if(!unique.includes(link.href)){
+            unique.push(link.href);
+    }})
+    //SHOW STATS
     if(opt.stats == true){
          console.log(`Total: ${arrayLinks.length}
-Unique: `) 
-    }
-    if(opt.validate == true && opt.stats == true){
-
-
+Unique: ${unique.length}`)
+    
     }else{
         return resolve (arrayLinks);
     }
-
-
     });
     
-
 
 module.exports = {
     mdLinks

@@ -1,15 +1,12 @@
 const path = require('path');
 const fs = require('fs');
 const axios = require('axios');
-const http = require('http');
-
-
 
 // IS ABSOLUTE PATH
  const absolutePath = (dir) => path.isAbsolute(dir);
 // RESOLVE PATH IF IT´S RELATIVE
 const isRelative = (dir) => path.resolve(dir);
-// VERIFY IF IS FOLDER
+// VERIFY IF ITS FOLDER
  const isFolder = (dir) => fs.lstatSync(dir).isDirectory();
 // READ FOLDERS
 const readFolders = (dirPath, resultFiles = []) => {
@@ -39,8 +36,6 @@ module.exports = {
     readFolders,
     readFile,
     getExtName,
-    validateLinks
-    
-       
+    validateLinks  
 };
 

@@ -4,7 +4,7 @@ const axios = require('axios');
 
 api.mdLinks('./src', {
     validate: false,
-    stats: true
+    stats: false
 }).then(console.log);
  /*const okLink = 'https://github.com/ferlanuz/CDMX013-md-links/tree/feature-requests';
 const linkRoto = 'https://ku-seo.com/libros-seo-sem/';
